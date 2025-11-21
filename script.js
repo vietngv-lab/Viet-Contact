@@ -25,7 +25,7 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
 
 const translations = {
     vi: {
-        bio: "- Dreamer -",
+        bio: "Gã Mơ Màng",
         mission: "\"Sống ngang tàng, yêu trong sáng. Hay xúi người ta hãy sống tử tế ...\"",
         donateTitle: "Ủng hộ tôi",
         donateDesc: "Quét mã để donate hoặc thanh toán",
@@ -43,7 +43,7 @@ const translations = {
         }
     },
     en: {
-        bio: "- Dreamer -",
+        bio: "Dreamer",
         mission: "\"Living recklessly, loving purely. Always encouraging people to live with kindness ...\"",
         donateTitle: "Support Me",
         donateDesc: "Scan QR code to donate or pay",
