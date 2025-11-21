@@ -359,6 +359,8 @@ body {
 /* Liquid Glass Effect - iOS 26 Concept Style */
 .glass-card {
     /* Nền kính dày và sâu hơn */
+    /* Viền kính tinh tế (Simple Glass Border) - Fix lỗi hở góc trên mobile */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background: linear-gradient(135deg,
             rgba(255, 255, 255, 0.08) 0%,
             rgba(255, 255, 255, 0.01) 50%,
@@ -368,20 +370,6 @@ body {
     border-radius: 35px;
     padding: 35px;
     text-align: center;
-
-    /* Viền gradient ánh sáng (Border Gradient) */
-    border: 1px solid transparent;
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-image: linear-gradient(135deg,
-            rgba(255, 255, 255, 0.15) 0%,
-            rgba(255, 255, 255, 0.01) 50%,
-            rgba(255, 255, 255, 0.05) 100%),
-        linear-gradient(145deg,
-            rgba(255, 255, 255, 0.5) 0%,
-            rgba(255, 255, 255, 0.1) 40%,
-            rgba(255, 255, 255, 0.05) 60%,
-            rgba(255, 255, 255, 0.2) 100%);
 
     /* Bóng đổ màu (Colored Shadows) tạo chiều sâu */
     box-shadow:
@@ -541,7 +529,8 @@ body.light-mode .bio::after {
 /* Mobile Responsiveness & Modern Touch */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 30px;
+        /* Tăng khoảng cách lề để nhìn thấy nhiều nền hơn */
     }
 
     .main-container {
@@ -585,7 +574,7 @@ body.light-mode .bio::after {
     filter: blur(40px);
 }
 
-}
+
 
 @keyframes float-card {
 
@@ -634,7 +623,7 @@ body.light-mode .bio::after {
     /* Bouncy effect */
 
     /* Crystal Glass Effect */
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -646,6 +635,15 @@ body.light-mode .bio::after {
 
     /* Grayscale filter by default */
     filter: grayscale(100%);
+}
+
+/* Global Light Mode: Icon màu xám sáng hơn cho cả Desktop & Mobile */
+body.light-mode .social-btn {
+    background: rgba(0, 0, 0, 0.05);
+    /* Nền tối nhẹ */
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #666;
+    /* Icon màu xám */
 }
 
 .social-btn:hover {
@@ -843,14 +841,12 @@ textarea {
     background: linear-gradient(45deg, #0068ff, #0041a3);
 }
 
-font-weight: 600;
-letter-spacing: 1px;
-}
+
 
 /* Mobile Responsiveness & Modern Touch */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 30px;
     }
 
     .main-container {
@@ -864,6 +860,11 @@ letter-spacing: 1px;
         animation: fadeInUp 1s ease-out forwards, float-card 6s ease-in-out infinite;
     }
 
+    /* Fix reflection radius on mobile */
+    .glass-card::before {
+        border-radius: 25px 25px 0 0;
+    }
+
     .avatar-container {
         width: 100px;
         height: 100px;
@@ -874,9 +875,14 @@ letter-spacing: 1px;
     }
 
     .settings-bar {
-        top: 10px;
-        right: 10px;
-        padding: 4px 8px;
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        width: auto;
+        /* Quan trọng: Ngăn không cho nó dài ra */
+        max-width: fit-content;
+        padding: 0;
+        /* Reset padding */
     }
 
     .toggle-btn {
@@ -914,6 +920,13 @@ letter-spacing: 1px;
         gap: 20px;
         /* Increase gap slightly for touch targets */
     }
+
+    /* Mobile Specific: Social Icons Adjustment */
+    .social-btn {
+        /* Mobile Dark Mode: Giảm độ đậm nền xuống nữa cho trong hơn */
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
 /* Footer Credit */
@@ -934,4 +947,17 @@ letter-spacing: 1px;
 
 body.light-mode .footer-credit p {
     opacity: 0.5;
+}
+
+/* Three.js Background Canvas */
+#stars-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Behind content, above blobs */
+    pointer-events: none;
+    /* Let clicks pass through */
 }

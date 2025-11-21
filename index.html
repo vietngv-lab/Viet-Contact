@@ -40,7 +40,7 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="stars.css">
+
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -72,10 +72,8 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Star Fly Effect Wrapper -->
-    <div class="stars-wrapper">
-        <div class="stars"></div>
-    </div>
+    <!-- Three.js Stars Canvas -->
+    <canvas id="stars-canvas"></canvas>
 
     <!-- Settings Bar (Fixed) -->
     <!-- Settings Bar (Floating Bottom Right) -->
@@ -177,6 +175,17 @@
     </div>
     <script src="vanilla-tilt.js"></script>
     <script src="script.js"></script>
+
+    <!-- Import Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js"
+            }
+        }
+    </script>
+    <!-- Three.js Stars Logic -->
+    <script type="module" src="stars.js"></script>
 </body>
 
 </html>
