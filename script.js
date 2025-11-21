@@ -1,5 +1,5 @@
 // Cấu hình thông tin cá nhân (Người dùng sẽ thay đổi ở đây)
-const MY_TELEGRAM_USERNAME = "vietngv_demo"; // Thay bằng username Telegram của bạn (không có @)
+const MY_TELEGRAM_USERNAME = "vietngv"; // Thay bằng username Telegram của bạn (không có @)
 
 document.getElementById('contact-form').addEventListener('submit', function (e) {
     e.preventDefault();
