@@ -1,0 +1,937 @@
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --text-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode {
+    --text-color: #333333;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    background-color: #f0f2f5;
+}
+
+body.light-mode .background-blobs {
+    background: #f0f2f5;
+}
+
+body.light-mode .blob {
+    opacity: 0.4;
+    filter: blur(50px);
+}
+
+body.light-mode h1 {
+    background: linear-gradient(to right, #333, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+body.light-mode .mission {
+    color: #667eea;
+    text-shadow: none;
+}
+
+body.light-mode input,
+body.light-mode textarea {
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* Settings Bar Styles - Flat Split-Pill */
+.settings-bar {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-radius: 30px;
+    /* Container background */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+body.light-mode .settings-bar {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.setting-item {
+    position: relative;
+}
+
+.setting-btn {
+    width: 60px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Left Button (Language) */
+#lang-toggle {
+    border-radius: 30px 0 0 30px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Right Button (Theme) */
+#theme-toggle {
+    border-radius: 0 30px 30px 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.setting-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.setting-btn:hover i,
+.setting-btn:hover span {
+    transform: scale(1.2);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.light-mode .setting-btn {
+    color: #333;
+}
+
+body.light-mode .setting-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.setting-btn:active i,
+.setting-btn:active span {
+    transform: scale(0.95);
+}
+
+.toggle-btn:hover,
+.toggle-btn.active {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-btn i.fa-chevron-down {
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+}
+
+.toggle-btn.active i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+body.light-mode .toggle-btn:hover,
+body.light-mode .toggle-btn.active {
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+}
+
+.divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 5px;
+}
+
+body.light-mode .divider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Menus */
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    /* Align right for better fit */
+    min-width: 120px;
+    background: rgba(20, 20, 40, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+body.light-mode .dropdown-menu {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 8px 15px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+body.light-mode .dropdown-item {
+    color: #333;
+}
+
+body.light-mode .dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .dropdown-item.active {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+    background-color: #0f0c29;
+    /* Fallback color */
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+    /* Prevent scrollbar from blobs */
+    position: relative;
+}
+
+/* Animated Background Blobs */
+.background-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+    background: #0f0c29;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.7;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: #ff00cc;
+    animation-name: float-1;
+    animation-duration: 15s;
+}
+
+.blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: #333399;
+    animation-name: float-2;
+    animation-duration: 20s;
+}
+
+.blob-3 {
+    top: 30%;
+    left: 30%;
+    width: 40vw;
+    height: 40vw;
+    background: #00d2ff;
+    animation-name: float-3;
+    animation-duration: 18s;
+}
+
+@keyframes float-1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        border-radius: 50%;
+    }
+
+    33% {
+        transform: translate(100px, 50px) rotate(45deg) scale(1.1);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    66% {
+        transform: translate(-50px, 100px) rotate(90deg) scale(0.9);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(135deg) scale(1);
+        border-radius: 50%;
+    }
+}
+
+@keyframes float-2 {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(-80px, -80px) rotate(-60deg) scale(1.2);
+    }
+
+    100% {
+        transform: translate(40px, -40px) rotate(20deg) scale(0.9);
+    }
+}
+
+@keyframes float-3 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(120px, -60px) scale(1.3);
+    }
+
+    100% {
+        transform: translate(-40px, 80px) scale(0.8);
+    }
+}
+
+.main-container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    z-index: 1;
+}
+
+/* Liquid Glass Effect - iOS 26 Concept Style */
+.glass-card {
+    /* Nền kính dày và sâu hơn */
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(255, 255, 255, 0.01) 50%,
+            rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(8px) saturate(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
+    border-radius: 35px;
+    padding: 35px;
+    text-align: center;
+
+    /* Viền gradient ánh sáng (Border Gradient) */
+    border: 1px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.01) 50%,
+            rgba(255, 255, 255, 0.05) 100%),
+        linear-gradient(145deg,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.1) 40%,
+            rgba(255, 255, 255, 0.05) 60%,
+            rgba(255, 255, 255, 0.2) 100%);
+
+    /* Bóng đổ màu (Colored Shadows) tạo chiều sâu */
+    box-shadow:
+        0 20px 40px -10px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 30px 60px -30px rgba(102, 126, 234, 0.3);
+    /* Ánh xanh từ primary color */
+
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+    animation: fadeInUp 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Hiệu ứng phản chiếu ánh sáng (Glossy Reflection) - Tinh tế hơn */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    opacity: 0.6;
+    border-radius: 35px 35px 0 0;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+/* Điểm sáng di chuyển (Dynamic Highlight) */
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 50%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.glass-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.4) inset,
+        0 40px 80px -40px rgba(102, 126, 234, 0.5);
+}
+
+/* Staggered Animation Delays */
+.profile-section {
+    animation-delay: 0.2s;
+}
+
+.payment-section {
+    animation-delay: 0.4s;
+}
+
+.contact-section {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Profile Section */
+.avatar-container {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+h1 {
+    margin: 10px 0 5px;
+    font-size: 2rem;
+    font-weight: 300;
+    background: linear-gradient(to right, #fff, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bio {
+    margin: 10px 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-transform: uppercase;
+}
+
+.bio::before,
+.bio::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode .bio::before,
+body.light-mode .bio::after {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.verified-icon {
+    color: #1877f2;
+    /* Facebook blue */
+    font-size: 0.75em;
+    /* Smaller than the name but more visible */
+    vertical-align: middle;
+    margin-left: 5px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+
+
+/* Mobile Responsiveness & Modern Touch */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .main-container {
+        gap: 15px;
+    }
+
+    .glass-card {
+        padding: 20px;
+        border-radius: 25px;
+        /* Subtle floating animation for mobile since tilt might be off */
+        animation: fadeInUp 1s ease-out forwards, float-card 6s ease-in-out infinite;
+    }
+
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .settings-bar {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+        /* Keep the same design as desktop */
+    }
+
+    .setting-btn {
+        width: 60px;
+        height: 40px;
+        font-size: 0.85rem;
+        /* Slightly smaller for mobile but keep the same structure */
+    }
+}
+
+/* Ensure blobs are visible but not overwhelming */
+.blob {
+    opacity: 0.5;
+    filter: blur(40px);
+}
+
+}
+
+@keyframes float-card {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.mission {
+    font-style: italic;
+    color: #ffd700;
+    font-size: 0.95rem;
+    margin-top: 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Social Links - Crystal Buttons */
+.social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Allow wrapping to prevent squeezing */
+    gap: 15px;
+    /* Slightly reduced gap for better fit */
+    margin-top: 25px;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* Prevent button from becoming oval */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy effect */
+
+    /* Crystal Glass Effect */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 0 10px rgba(255, 255, 255, 0.1),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    /* Top highlight */
+
+    /* Grayscale filter by default */
+    filter: grayscale(100%);
+}
+
+.social-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.4),
+        /* Outer glow */
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
+
+    /* Remove grayscale on hover to show full color */
+    filter: grayscale(0%);
+}
+
+/* Style for social icon images (like Zalo logo) */
+.social-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.facebook:hover {
+    color: #1877f2;
+    text-shadow: 0 0 10px rgba(24, 119, 242, 0.6);
+}
+
+.zalo:hover {
+    color: #0068ff;
+    text-shadow: 0 0 10px rgba(0, 104, 255, 0.6);
+}
+
+.instagram:hover {
+    color: #e1306c;
+    text-shadow: 0 0 10px rgba(225, 48, 108, 0.6);
+}
+
+.telegram:hover {
+    color: #0088cc;
+    text-shadow: 0 0 10px rgba(0, 136, 204, 0.6);
+}
+
+.gmail:hover {
+    color: #ea4335;
+    text-shadow: 0 0 10px rgba(234, 67, 53, 0.6);
+}
+
+.phone:hover {
+    color: #34a853;
+    text-shadow: 0 0 10px rgba(52, 168, 83, 0.6);
+}
+
+.tiktok:hover {
+    color: #000000;
+    /* TikTok black */
+    text-shadow: 2px 2px 0px #ff0050, -2px -2px 0px #00f2ea;
+    /* TikTok glitch effect */
+}
+
+/* Payment Section */
+.qr-container {
+    display: block;
+    width: fit-content;
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.qr-container:hover {
+    transform: scale(1.02);
+}
+
+.qr-container img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+.qr-description {
+    color: var(--text-color);
+    margin: 15px 0 0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+body.light-mode .qr-description {
+    color: #333;
+}
+
+/* Contact Form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 0 0 4px rgba(255, 255, 255, 0.1),
+        inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.send-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+
+    /* Jelly Button Style */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.send-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.send-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    border-color: white;
+}
+
+.telegram-bg {
+    background: linear-gradient(45deg, #0088cc, #005f8f);
+}
+
+.zalo-bg {
+    background: linear-gradient(45deg, #0068ff, #0041a3);
+}
+
+font-weight: 600;
+letter-spacing: 1px;
+}
+
+/* Mobile Responsiveness & Modern Touch */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .main-container {
+        gap: 15px;
+    }
+
+    .glass-card {
+        padding: 20px;
+        border-radius: 25px;
+        /* Subtle floating animation for mobile since tilt might be off */
+        animation: fadeInUp 1s ease-out forwards, float-card 6s ease-in-out infinite;
+    }
+
+    .avatar-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .settings-bar {
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+    }
+
+    .toggle-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* Ensure blobs are visible but not overwhelming */
+    .blob {
+        opacity: 0.5;
+        filter: blur(40px);
+    }
+}
+
+@keyframes float-card {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Fix Mobile Layout Override */
+@media (max-width: 768px) {
+
+    /* Balanced 3x2 Layout for Social Buttons on Mobile */
+    .social-links {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+        gap: 20px;
+        /* Increase gap slightly for touch targets */
+    }
+}
+
+/* Footer Credit */
+.footer-credit {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.footer-credit p {
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+body.light-mode .footer-credit p {
+    opacity: 0.5;
+}
